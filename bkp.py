@@ -57,7 +57,7 @@ class Ball:
     def Bounce(self):
         if int(self.pos[1] * SCALE) <= self.radius*2 or int(self.pos[1] * SCALE) >= WIN_HEIGHT - self.radius*2:
             self.y_speed = -self.y_speed
-            #BOUNCE_SOUND.play()
+            BOUNCE_SOUND.play()
 
     def Hit_Bounce(self, bounce, ang):
         if bounce:
