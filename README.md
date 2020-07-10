@@ -1,1 +1,29 @@
 # AI-Plays-Pong
+This is an implementation of a machine learning algorithm called Q-learning that plays the classic game of Pong.
+
+# Pong
+Pong is a table tennis sports game featuring simple two-dimensional graphics, manufactured by Atari and originally released in 1972. It was one of the earliest arcade video games and created by Allan Alcorn as a training exercise assigned to him by Atari co-founder Nolan Bushnell. Bushnell based the game's concept on an electronic ping-pong game included in the Magnavox Odyssey, the first home video game console. In response, Magnavox later sued Atari for patent infringement. Bushnell and Atari co-founder Ted Dabney were surprised by the quality of Alcorn's work and decided to manufacture the game.
+
+Pong was the first commercially successful video game, and it helped to establish the video game industry along with the Magnavox Odyssey. Soon after its release, several companies began producing games that closely mimicked its gameplay. Eventually, Atari's competitors released new types of video games that deviated from Pong's original format to varying degrees, and this, in turn, led Atari to encourage its staff to move beyond Pong, as well and to produce more innovative games themselves.
+
+Atari has released several sequels to Pong that built upon the original's gameplay by adding new features. During the 1975 Christmas season, Atari released a home version of Pong exclusively through Sears retail stores. The home version was also a commercial success and led to numerous clones. The game has been remade on numerous home and portable platforms following its release. Pong is part of the permanent collection of the Smithsonian Institution in Washington, D.C., due to its cultural impact.
+
+#Q-Learning
+Q-learning is a model-free reinforcement learning algorithm to learn a policy telling an agent what action to take under what circumstances. It does not require a model (hence the connotation "model-free") of the environment, and it can handle problems with stochastic transitions and rewards, without requiring adaptations.
+
+For any finite Markov decision process (FMDP), Q-learning finds an optimal policy in the sense of maximizing the expected value of the total reward over any and all successive steps, starting from the current state.[1] Q-learning can identify an optimal action-selection policy for any given FMDP, given infinite exploration time and a partly-random policy.[1] "Q" names the function that returns the reward used to provide the reinforcement and can be said to stand for the "quality" of an action taken in a given state.
+
+## Reinforcement learning
+The weight for a step from a state {\displaystyle \Delta t}\Delta t steps into the future is calculated as {\displaystyle \gamma ^{\Delta t}}\gamma ^{{\Delta t}}, where {\displaystyle \gamma }\gamma  (the discount factor) is a number between 0 and 1 ({\displaystyle 0\leq \gamma \leq 1}0\leq \gamma \leq 1) and has the effect of valuing rewards received earlier higher than those received later (reflecting the value of a "good start"). {\displaystyle \gamma }\gamma  may also be interpreted as the probability to succeed (or survive) at every step {\displaystyle \Delta t}\Delta t.
+
+The algorithm, therefore, has a function that calculates the quality of a state-action combination:
+
+{\displaystyle Q:S\times A\to \mathbb {R} }Q:S\times A\to {\mathbb  {R}} .
+Before learning begins, {\displaystyle Q}Q is initialized to a possibly arbitrary fixed value (chosen by the programmer). Then, at each time {\displaystyle t}t the agent selects an action {\displaystyle a_{t}}a_{t}, observes a reward {\displaystyle r_{t}}r_{t}, enters a new state {\displaystyle s_{t+1}}s_{t+1} (that may depend on both the previous state {\displaystyle s_{t}}s_{t} and the selected action), and {\displaystyle Q}Q is updated. The core of the algorithm is a Bellman equation as a simple value iteration update, using the weighted average of the old value and the new information:
+
+{\displaystyle Q^{new}(s_{t},a_{t})\leftarrow \underbrace {Q(s_{t},a_{t})} _{\text{old value}}+\underbrace {\alpha } _{\text{learning rate}}\cdot \overbrace {{\bigg (}\underbrace {\underbrace {r_{t}} _{\text{reward}}+\underbrace {\gamma } _{\text{discount factor}}\cdot \underbrace {\max _{a}Q(s_{t+1},a)} _{\text{estimate of optimal future value}}} _{\text{new value (temporal difference target)}}-\underbrace {Q(s_{t},a_{t})} _{\text{old value}}{\bigg )}} ^{\text{temporal difference}}}{\displaystyle Q^{new}(s_{t},a_{t})\leftarrow \underbrace {Q(s_{t},a_{t})} _{\text{old value}}+\underbrace {\alpha } _{\text{learning rate}}\cdot \overbrace {{\bigg (}\underbrace {\underbrace {r_{t}} _{\text{reward}}+\underbrace {\gamma } _{\text{discount factor}}\cdot \underbrace {\max _{a}Q(s_{t+1},a)} _{\text{estimate of optimal future value}}} _{\text{new value (temporal difference target)}}-\underbrace {Q(s_{t},a_{t})} _{\text{old value}}{\bigg )}} ^{\text{temporal difference}}}
+where {\displaystyle r_{t}}{\displaystyle r_{t}} is the reward received when moving from the state {\displaystyle s_{t}}s_{{t}} to the state {\displaystyle s_{t+1}}s_{t+1}, and {\displaystyle \alpha }\alpha  is the learning rate ({\displaystyle 0<\alpha \leq 1}0<\alpha \leq 1).
+
+An episode of the algorithm ends when state {\displaystyle s_{t+1}}s_{t+1} is a final or terminal state. However, Q-learning can also learn in non-episodic tasks.[citation needed] If the discount factor is lower than 1, the action values are finite even if the problem can contain infinite loops.
+
+For all final states {\displaystyle s_{f}}s_{f}, {\displaystyle Q(s_{f},a)}Q(s_{f},a) is never updated, but is set to the reward value {\displaystyle r}r observed for state {\displaystyle s_{f}}s_{f}. In most cases, {\displaystyle Q(s_{f},a)}Q(s_{f},a) can be taken to equal zero.
